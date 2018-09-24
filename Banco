@@ -1,0 +1,90 @@
+# Compiled class file
+*.class
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+      
+class Conta
+{
+    String titular; double saldo = 0; int numero_conta,cpf,idade;
+    
+    void Sacar (double quantidade) 
+    {
+    	double saldo2 = this.saldo - quantidade;
+    	this.saldo = saldo2;	
+    }
+     void depositar(double quantidade)
+    {
+        this.saldo += quantidade;		
+    }
+       
+}
+class Conta_Corrente
+{
+
+	
+}
+
+public class banco {
+	public static void main(String[] args) throws IOException 
+	{
+		
+		FileWriter arq = new FileWriter("C:\\Contas.txt");
+		PrintWriter gravarArq = new PrintWriter(arq);
+		Scanner entrada = new Scanner(System.in);
+		
+		Conta pessoa = new Conta();
+		System.out.println("Você já possuí uma conta? [Sim] ou [Não]");
+		String Resposta_conta = entrada.next();
+	        if( Resposta_conta.equals("Sim")) 
+	        {
+	        	System.out.println("******************************\nSe quiser depositar na conta digite [1]\nSe quiser sacar da conta digite [2]\nSe quiser verificar seu status digite [3]");
+	        	int Decisao_conta = entrada.nextInt();
+	        			switch (Decisao_conta) 
+	        {
+	        			case 1:
+	        				
+	        				System.out.println("Quanto voçê quer depositar?");
+	        			    pessoa.Sacar(entrada.nextDouble());
+	        			     
+	        			break;		
+	        			case 2:
+	        				System.out.println("Quanto voçê quer sacar?");
+	        				double sacar = entrada.nextDouble();
+	        				if(sacar < pessoa.saldo)
+	        				{
+	        					pessoa.Sacar(sacar);
+	        				}
+	        				else 
+	        				{
+	        					System.out.println("Dinheiro insuficiente");
+	        				}
+	        			break;
+	        			case 3:
+	        				System.out.println("****************"+pessoa.titular+"/n"+pessoa.cpf+pessoa.saldo+"\n"+pessoa.idade+"\n"+pessoa.numero_conta );
+	        			break;
+	      
+	        			default:
+	        			System.out.println("Esta não é uma escolha válida!");
+	        }
+	        }
+	        if (Resposta_conta.equals("Não")) 
+	        {
+	        	System.out.println("Digite seu nome: ");
+	    	    pessoa.titular  = entrada.next();
+	            System.out.println("Digite sua idade: ");
+	            pessoa.idade = entrada.nextInt();
+	            System.out.println("Digite seu cpf: ");
+	            pessoa.cpf = entrada.nextInt();
+	    	    System.out.println("Digite seu numero da conta ");
+	    	    pessoa.numero_conta = entrada.nextInt();
+	        }
+	        
+	        
+	}
+}
+
+	
+
